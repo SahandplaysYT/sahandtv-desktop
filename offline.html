@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahand TV — No Connection</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #08090d;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+    }
+    .icon {
+      width: 64px;
+      height: 64px;
+      background: #e9a23b;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #08090d;
+      margin: 0 auto 1.5rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+    p { color: rgba(255,255,255,0.45); font-size: 0.95rem; line-height: 1.6; max-width: 320px; margin: 0 auto 1.5rem; }
+    button {
+      background: #e9a23b;
+      color: #08090d;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { background: #f4bb6a; }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="icon">S</div>
+    <h1>No internet connection</h1>
+    <p>Sahand TV needs an internet connection to stream. Check your connection and try again.</p>
+    <button onclick="location.href='https://sahandtv.vercel.app'">Try again</button>
+  </div>
+</body>
+</html>

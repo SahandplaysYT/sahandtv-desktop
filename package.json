@@ -1,0 +1,31 @@
+{
+  "name": "sahandtv",
+  "version": "1.0.0",
+  "description": "Sahand TV Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "build": {
+    "appId": "com.sahandtv.app",
+    "productName": "SahandTV",
+    "win": {
+      "target": "nsis",
+      "icon": "icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "icon.png",
+      "uninstallerIcon": "icon.png",
+      "shortcutName": "Sahand TV",
+      "runAfterFinish": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}
