@@ -24,6 +24,48 @@ jobs:
       - name: Generate icon
         run: node generate-icon.js
 
+      - name: Convert PNG to ICO
+        shell: powershell
+        run: |
+          Add-Type -AssemblyName System.Drawing
+          $png = [System.Drawing.Image]::FromFile("$PWD\icon.png")
+          $sizes = @(256, 128, 64, 48, 32, 16)
+          $images = @()
+          foreach ($size in $sizes) {
+            $resized = New-Object System.Drawing.Bitmap($size, $size)
+            $g = [System.Drawing.Graphics]::FromImage($resized)
+            $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+            $g.DrawImage($png, 0, 0, $size, $size)
+            $g.Dispose()
+            $imgMs = New-Object System.IO.MemoryStream
+            $resized.Save($imgMs, [System.Drawing.Imaging.ImageFormat]::Png)
+            $images += ,$imgMs.ToArray()
+            $resized.Dispose()
+          }
+          $png.Dispose()
+          $ms = New-Object System.IO.MemoryStream
+          $writer = New-Object System.IO.BinaryWriter($ms)
+          $writer.Write([uint16]0)
+          $writer.Write([uint16]1)
+          $writer.Write([uint16]$sizes.Count)
+          $offset = [uint32](6 + $sizes.Count * 16)
+          for ($i = 0; $i -lt $sizes.Count; $i++) {
+            $s = $sizes[$i]
+            $writer.Write([byte]$(if ($s -eq 256) { 0 } else { $s }))
+            $writer.Write([byte]$(if ($s -eq 256) { 0 } else { $s }))
+            $writer.Write([byte]0)
+            $writer.Write([byte]0)
+            $writer.Write([uint16]1)
+            $writer.Write([uint16]32)
+            $writer.Write([uint32]$images[$i].Length)
+            $writer.Write($offset)
+            $offset += [uint32]$images[$i].Length
+          }
+          foreach ($img in $images) { $writer.Write($img) }
+          $writer.Flush()
+          [System.IO.File]::WriteAllBytes("$PWD\icon.ico", $ms.ToArray())
+          Write-Host "icon.ico generated"
+
       - name: Build Windows installer
         run: npm run dist
 

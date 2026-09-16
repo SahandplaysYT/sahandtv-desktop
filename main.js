@@ -8,7 +8,7 @@ function createWindow() {
     minWidth: 800,
     minHeight: 600,
     title: 'Sahand TV',
-    icon: path.join(__dirname, 'icon.png'),
+    icon: path.join(__dirname, 'icon.ico'),
     backgroundColor: '#08090d',
     autoHideMenuBar: true,
     webPreferences: {

@@ -12,12 +12,12 @@
     "productName": "SahandTV",
     "win": {
       "target": "nsis",
-      "icon": "icon.png"
+      "icon": "icon.ico"
     },
     "nsis": {
       "oneClick": true,
-      "installerIcon": "icon.png",
-      "uninstallerIcon": "icon.png",
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
       "shortcutName": "Sahand TV",
       "runAfterFinish": true,
       "createDesktopShortcut": true,
